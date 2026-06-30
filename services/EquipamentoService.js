@@ -28,37 +28,6 @@ class EquipamentoService {
             cidade_id
         } = dados;
 
-        if (
-            !nome ||
-            !modelo ||
-            !fabricante ||
-            !data_aquisicao ||
-            !status ||
-            !cidade_id
-        ) {
-            const error = new Error("Todos os campos são obrigatórios.");
-            error.status = 400;
-            throw error;
-        }
-
-        const statusValidos = [
-            "ATIVO",
-            "MANUTENCAO",
-            "INATIVO"
-        ];
-
-        if (!statusValidos.includes(status)) {
-            const error = new Error("Status inválido.");
-            error.status = 400;
-            throw error;
-        }
-
-        if (isNaN(Date.parse(data_aquisicao))) {
-            const error = new Error("Data de aquisição inválida.");
-            error.status = 400;
-            throw error;
-        }
-
         const cidade = await Cidade.findById(cidade_id);
 
         if (!cidade) {
@@ -81,33 +50,6 @@ class EquipamentoService {
             status,
             cidade_id
         } = dados;
-
-        if (
-            !nome ||
-            !modelo ||
-            !fabricante ||
-            !data_aquisicao ||
-            !status ||
-            !cidade_id
-        ) {
-            const error = new Error("Todos os campos são obrigatórios.");
-            error.status = 400;
-            throw error;
-        }
-
-        const statusValidos = [
-            "ATIVO",
-            "MANUTENCAO",
-            "INATIVO"
-        ];
-
-        if (!statusValidos.includes(status)) {
-            const error = new Error("Status inválido.");
-        }
-
-        if (isNaN(Date.parse(data_aquisicao))) {
-            const error = new Error("Data de aquisição inválida.");
-        }
 
         const cidade = await Cidade.findById(cidade_id);
 
