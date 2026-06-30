@@ -10,7 +10,9 @@ class EquipamentoService {
         const equipamento = await Equipamento.findById(id);
 
         if (!equipamento) {
-            throw new Error("Equipamento não encontrado.");
+            const error = new Error("Equipamento não encontrado.");
+            error.status = 404;
+            throw error;
         }
 
         return equipamento;
@@ -34,7 +36,9 @@ class EquipamentoService {
             !status ||
             !cidade_id
         ) {
-            throw new Error("Todos os campos são obrigatórios.");
+            const error = new Error("Todos os campos são obrigatórios.");
+            error.status = 400;
+            throw error;
         }
 
         const statusValidos = [
@@ -44,17 +48,23 @@ class EquipamentoService {
         ];
 
         if (!statusValidos.includes(status)) {
-            throw new Error("Status inválido.");
+            const error = new Error("Status inválido.");
+            error.status = 400;
+            throw error;
         }
 
         if (isNaN(Date.parse(data_aquisicao))) {
-            throw new Error("Data de aquisição inválida.");
+            const error = new Error("Data de aquisição inválida.");
+            error.status = 400;
+            throw error;
         }
 
         const cidade = await Cidade.findById(cidade_id);
 
         if (!cidade) {
-            throw new Error("Cidade não encontrada.");
+            const error = new Error("Cidade não encontrada.");
+            error.status = 404;
+            throw error;
         }
 
         return await Equipamento.create(dados);
@@ -80,7 +90,9 @@ class EquipamentoService {
             !status ||
             !cidade_id
         ) {
-            throw new Error("Todos os campos são obrigatórios.");
+            const error = new Error("Todos os campos são obrigatórios.");
+            error.status = 400;
+            throw error;
         }
 
         const statusValidos = [
@@ -90,17 +102,23 @@ class EquipamentoService {
         ];
 
         if (!statusValidos.includes(status)) {
-            throw new Error("Status inválido.");
+            const error = new Error("Status inválido.");
+            error.status = 400;
+            throw error;
         }
 
         if (isNaN(Date.parse(data_aquisicao))) {
-            throw new Error("Data de aquisição inválida.");
+            const error = new Error("Data de aquisição inválida.");
+            error.status = 400;
+            throw error;
         }
 
         const cidade = await Cidade.findById(cidade_id);
 
         if (!cidade) {
-            throw new Error("Cidade não encontrada.");
+            const error = new Error("Cidade não encontrada.");
+            error.status = 404;
+            throw error;
         }
 
         return await Equipamento.update(id, dados);

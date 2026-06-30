@@ -10,7 +10,9 @@ class FuncionarioService {
         const funcionario = await Funcionario.findById(id);
 
         if (!funcionario) {
-            throw new Error("Funcionário não encontrado.");
+            const error = new Error("Funcionário não encontrado.");
+            error.status = 404;
+            throw error;
         }
 
         return funcionario;
@@ -34,23 +36,31 @@ class FuncionarioService {
             salario === undefined ||
             !cidade_id
         ) {
-            throw new Error("Todos os campos são obrigatórios.");
+            const error = new Error("Todos os campos são obrigatórios.");
+            error.status = 400;
+            throw error;
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailRegex.test(email)) {
-            throw new Error("E-mail inválido.");
+            const error = new Error("E-mail inválido.");
+            error.status = 400;
+            throw error;
         }
 
         if (Number(salario) < 0) {
-            throw new Error("O salário deve ser maior ou igual a zero.");
+            const error = new Error("O salário deve ser maior ou igual a zero.");
+            error.status = 400;
+            throw error;
         }
 
         const cidade = await Cidade.findById(cidade_id);
 
         if (!cidade) {
-            throw new Error("Cidade não encontrada.");
+            const error = new Error("Cidade não encontrada.");
+            error.status = 404;
+            throw error;
         }
 
         return await Funcionario.create(dados);
@@ -76,23 +86,31 @@ class FuncionarioService {
             salario === undefined ||
             !cidade_id
         ) {
-            throw new Error("Todos os campos são obrigatórios.");
+            const error = new Error("Todos os campos são obrigatórios.");
+            error.status = 400;
+            throw error;
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailRegex.test(email)) {
-            throw new Error("E-mail inválido.");
+            const error = new Error("E-mail inválido.");
+            error.status = 400;
+            throw error;
         }
 
         if (Number(salario) < 0) {
-            throw new Error("O salário deve ser maior ou igual a zero.");
+            const error = new Error("O salário deve ser maior ou igual a zero.");
+            error.status = 400;
+            throw error;
         }
 
         const cidade = await Cidade.findById(cidade_id);
 
         if (!cidade) {
-            throw new Error("Cidade não encontrada.");
+            const error = new Error("Cidade não encontrada.");
+            error.status = 404;
+            throw error;
         }
 
         return await Funcionario.update(id, dados);

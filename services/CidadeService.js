@@ -9,7 +9,9 @@ class CidadeService {
         const cidade = await Cidade.findById(id);
 
         if (!cidade) {
-            throw new Error("Cidade não encontrada.");
+            const error = new Error("Cidade não encontrada.");
+            error.status = 404;
+            throw error;
         }
 
         return cidade;
@@ -19,15 +21,21 @@ class CidadeService {
         const { nome, estado, populacao } = dados;
 
         if (!nome || !estado || populacao === undefined) {
-            throw new Error("Todos os campos são obrigatórios.");
+            const error = new Error("Todos os campos são obrigatórios.");
+            error.status = 400;
+            throw error;
         }
 
         if (estado.length !== 2) {
-            throw new Error("O estado deve possuir 2 caracteres.");
+            const error = new Error("O estado deve possuir 2 caracteres.");
+            error.status = 400;
+            throw error;
         }
 
         if (Number(populacao) < 0) {
-            throw new Error("A população deve ser maior ou igual a zero.");
+            const error = new Error("A população deve ser maior ou igual a zero.");
+            error.status = 400;
+            throw error;
         }
 
         return await Cidade.create(dados);
@@ -39,15 +47,21 @@ class CidadeService {
         const { nome, estado, populacao } = dados;
 
         if (!nome || !estado || populacao === undefined) {
-            throw new Error("Todos os campos são obrigatórios.");
+            const error = new Error("Todos os campos são obrigatórios.");
+            error.status = 400;
+            throw error;
         }
 
         if (estado.length !== 2) {
-            throw new Error("O estado deve possuir 2 caracteres.");
+            const error = new Error("O estado deve possuir 2 caracteres.");
+            error.status = 400;
+            throw error;
         }
 
         if (Number(populacao) < 0) {
-            throw new Error("A população deve ser maior ou igual a zero.");
+            const error = new Error("A população deve ser maior ou igual a zero.");
+            error.status = 400;
+            throw error;
         }
 
         return await Cidade.update(id, dados);

@@ -10,7 +10,9 @@ class ServicoService {
         const servico = await Servico.findById(id);
 
         if (!servico) {
-            throw new Error("Serviço não encontrado.");
+            const error = new Error("Serviço não encontrado.");
+            error.status = 404;
+            throw error;
         }
 
         return servico;
@@ -34,36 +36,50 @@ class ServicoService {
             valor === undefined ||
             !Array.isArray(equipamentos)
         ) {
-            throw new Error("Todos os campos são obrigatórios.");
+            const error = new Error("Todos os campos são obrigatórios.");
+            error.status = 400;
+            throw error;
         }
 
         if (equipamentos.length === 0) {
-            throw new Error("Informe pelo menos um equipamento.");
+            const error = new Error("Informe pelo menos um equipamento.");
+            error.status = 400;
+            throw error;
         }
 
         if (isNaN(Date.parse(data_inicio))) {
-            throw new Error("Data de início inválida.");
+            const error = new Error("Data de início inválida.");
+            error.status = 400;
+            throw error;
         }
 
         if (isNaN(Date.parse(data_fim))) {
-            throw new Error("Data de fim inválida.");
+            const error = new Error("Data de fim inválida.");
+            error.status = 400;
+            throw error;
         }
 
         if (new Date(data_fim) < new Date(data_inicio)) {
-            throw new Error("A data de fim deve ser maior ou igual à data de início.");
+            const error = new Error("A data de fim deve ser maior ou igual à data de início.");
+            error.status = 400;
+            throw error;
         }
 
         if (Number(valor) < 0) {
-            throw new Error("O valor deve ser maior ou igual a zero.");
+            const error = new Error("O valor deve ser maior ou igual a zero.");
+            error.status = 400;
+            throw error;
         }
 
         for (const equipamentoId of equipamentos) {
             const equipamento = await Equipamento.findById(equipamentoId);
 
             if (!equipamento) {
-                throw new Error(
+                const error = new Error(
                     `Equipamento ${equipamentoId} não encontrado.`
                 );
+                error.status = 404;
+                throw error;
             }
         }
 
@@ -90,36 +106,50 @@ class ServicoService {
             valor === undefined ||
             !Array.isArray(equipamentos)
         ) {
-            throw new Error("Todos os campos são obrigatórios.");
+            const error = new Error("Todos os campos são obrigatórios.");
+            error.status = 400;
+            throw error;
         }
 
         if (equipamentos.length === 0) {
-            throw new Error("Informe pelo menos um equipamento.");
+            const error = new Error("Informe pelo menos um equipamento.");
+            error.status = 400;
+            throw error;
         }
 
         if (isNaN(Date.parse(data_inicio))) {
-            throw new Error("Data de início inválida.");
+            const error = new Error("Data de início inválida.");
+            error.status = 400;
+            throw error;
         }
 
         if (isNaN(Date.parse(data_fim))) {
-            throw new Error("Data de fim inválida.");
+            const error = new Error("Data de fim inválida.");
+            error.status = 400;
+            throw error;
         }
 
         if (new Date(data_fim) < new Date(data_inicio)) {
-            throw new Error("A data de fim deve ser maior ou igual à data de início.");
+            const error = new Error("A data de fim deve ser maior ou igual à data de início.");
+            error.status = 400;
+            throw error;
         }
 
         if (Number(valor) < 0) {
-            throw new Error("O valor deve ser maior ou igual a zero.");
+            const error = new Error("O valor deve ser maior ou igual a zero.");
+            error.status = 400;
+            throw error;
         }
 
         for (const equipamentoId of equipamentos) {
             const equipamento = await Equipamento.findById(equipamentoId);
 
             if (!equipamento) {
-                throw new Error(
+                const error = new Error(
                     `Equipamento ${equipamentoId} não encontrado.`
                 );
+                error.status = 400;
+                throw error;
             }
         }
 

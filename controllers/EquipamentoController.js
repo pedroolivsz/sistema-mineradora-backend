@@ -1,7 +1,7 @@
 const EquipamentoService = require("../services/EquipamentoService");
 
 class EquipamentoController {
-    static async listar(req, res) {
+    static async listar(req, res, next) {
         try {
             const equipamentos = await EquipamentoService.listar();
 
@@ -12,14 +12,11 @@ class EquipamentoController {
             });
 
         } catch (error) {
-            return res.status(500).json({
-                success: false,
-                message: error.message
-            });
+            next(error);
         }
     }
 
-    static async buscarPorId(req, res) {
+    static async buscarPorId(req, res, next) {
         try {
             const { id } = req.params;
 
@@ -32,14 +29,11 @@ class EquipamentoController {
             });
 
         } catch (error) {
-            return res.status(404).json({
-                success: false,
-                message: error.message
-            });
+            next(error);
         }
     }
 
-    static async cadastrar(req, res) {
+    static async cadastrar(req, res, next) {
         try {
             const equipamento = await EquipamentoService.cadastrar(req.body);
 
@@ -50,14 +44,11 @@ class EquipamentoController {
             });
 
         } catch (error) {
-            return res.status(400).json({
-                success: false,
-                message: error.message
-            });
+            next(error);
         }
     }
 
-    static async editar(req, res) {
+    static async editar(req, res, next) {
         try {
             const { id } = req.params;
 
@@ -70,14 +61,11 @@ class EquipamentoController {
             });
 
         } catch (error) {
-            return res.status(400).json({
-                success: false,
-                message: error.message
-            });
+            next(error);
         }
     }
 
-    static async excluir(req, res) {
+    static async excluir(req, res, next) {
         try {
             const { id } = req.params;
 
@@ -89,10 +77,7 @@ class EquipamentoController {
             });
 
         } catch (error) {
-            return res.status(400).json({
-                success: false,
-                message: error.message
-            });
+            next(error);
         }
     }
 }

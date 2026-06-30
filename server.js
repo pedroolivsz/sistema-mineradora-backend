@@ -9,6 +9,8 @@ const express = require("express");
 const cors = require("./config/cors");
 const pool = require("./database/connection");
 
+const errorHandler = require("./middlewares/errorHandler");
+
 const app = express();
 
 app.use(cors);
@@ -18,6 +20,8 @@ app.use("/cidades", cidadeRoutes);
 app.use("/funcionario", funcionarioRoutes);
 app.use("/equipamento", equipamentoRoutes);
 app.use("/servico", servicoRoutes);
+
+app.use(errorHandler);
 
 app.get("/", (request, response) => {
     response.status(200).json({
