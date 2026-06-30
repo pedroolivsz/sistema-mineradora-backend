@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("./config/cors");
 const pool = require("./database/connection");
-const query = require("pg/lib/native/query");
 
 const app = express();
 
