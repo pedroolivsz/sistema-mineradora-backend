@@ -37,3 +37,29 @@ CONSTRAINT fk_funcionario_cidade
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 );
+
+-- =========================================
+-- TABELA: EQUIPAMENTO
+-- =========================================
+
+CREATE TABLE equipamento (
+id SERIAL NOT NULL,
+nome VARCHAR(100) NOT NULL,
+modelo VARCHAR(100) NOT NULL,
+fabricante VARCHAR(100) NOT NULL,
+data_aquisicao DATE NOT NULL,
+status VARCHAR(20) NOT NULL,
+cidade_id INTEGER NOT NULL,
+
+CONSTRAINT pk_equipamento
+    PRIMARY KEY (id),
+
+CONSTRAINT ck_equipamento_status
+    CHECK (status IN ('ATIVO', 'MANUTENCAO', 'INATIVO')),
+
+CONSTRAINT fk_equipamento_cidade
+    FOREIGN KEY (cidade_id)
+    REFERENCES cidade(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+);
