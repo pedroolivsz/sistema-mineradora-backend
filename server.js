@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const cidadeRoutes = require("./routes/cidades")
+
 const express = require("express");
 const cors = require("./config/cors");
 const pool = require("./database/connection");
@@ -8,6 +10,8 @@ const app = express();
 
 app.use(cors);
 app.use(express.json());
+
+app.use("/cidades", cidadeRoutes);
 
 app.get("/", (request, response) => {
     response.status(200).json({
