@@ -1,5 +1,6 @@
 const express = require("express");
 const FuncionarioController = require("../controllers/FuncionarioController");
+const validateFuncionario = require("../middlewares/validateFuncionario");
 
 const router = express.Router();
 
@@ -7,9 +8,15 @@ router.get("/", FuncionarioController.listar);
 
 router.get("/:id", FuncionarioController.buscarPorId);
 
-router.post("/", FuncionarioController.cadastrar);
+router.post("/",
+    validateFuncionario,
+    FuncionarioController.cadastrar
+);
 
-router.put("/:id", FuncionarioController.editar);
+router.put("/:id",
+    validateFuncionario,
+    FuncionarioController.editar
+);
 
 router.delete("/:id", FuncionarioController.excluir);
 

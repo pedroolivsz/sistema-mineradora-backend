@@ -103,22 +103,16 @@ class EquipamentoService {
 
         if (!statusValidos.includes(status)) {
             const error = new Error("Status inválido.");
-            error.status = 400;
-            throw error;
         }
 
         if (isNaN(Date.parse(data_aquisicao))) {
             const error = new Error("Data de aquisição inválida.");
-            error.status = 400;
-            throw error;
         }
 
         const cidade = await Cidade.findById(cidade_id);
 
         if (!cidade) {
-            const error = new Error("Cidade não encontrada.");
-            error.status = 404;
-            throw error;
+            throw new Error("Cidade não encontrada.");
         }
 
         return await Equipamento.update(id, dados);

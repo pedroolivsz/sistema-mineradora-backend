@@ -28,33 +28,6 @@ class FuncionarioService {
             cidade_id
         } = dados;
 
-        if (
-            !nome ||
-            !cargo ||
-            !telefone ||
-            !email ||
-            salario === undefined ||
-            !cidade_id
-        ) {
-            const error = new Error("Todos os campos são obrigatórios.");
-            error.status = 400;
-            throw error;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailRegex.test(email)) {
-            const error = new Error("E-mail inválido.");
-            error.status = 400;
-            throw error;
-        }
-
-        if (Number(salario) < 0) {
-            const error = new Error("O salário deve ser maior ou igual a zero.");
-            error.status = 400;
-            throw error;
-        }
-
         const cidade = await Cidade.findById(cidade_id);
 
         if (!cidade) {
@@ -77,33 +50,6 @@ class FuncionarioService {
             salario,
             cidade_id
         } = dados;
-
-        if (
-            !nome ||
-            !cargo ||
-            !telefone ||
-            !email ||
-            salario === undefined ||
-            !cidade_id
-        ) {
-            const error = new Error("Todos os campos são obrigatórios.");
-            error.status = 400;
-            throw error;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailRegex.test(email)) {
-            const error = new Error("E-mail inválido.");
-            error.status = 400;
-            throw error;
-        }
-
-        if (Number(salario) < 0) {
-            const error = new Error("O salário deve ser maior ou igual a zero.");
-            error.status = 400;
-            throw error;
-        }
 
         const cidade = await Cidade.findById(cidade_id);
 
