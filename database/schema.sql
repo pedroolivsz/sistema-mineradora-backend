@@ -63,3 +63,25 @@ CONSTRAINT fk_equipamento_cidade
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 );
+
+-- =========================================
+-- TABELA: SERVICO
+-- =========================================
+
+CREATE TABLE servico (
+id SERIAL NOT NULL,
+nome VARCHAR(100) NOT NULL,
+descricao TEXT NOT NULL,
+data_inicio DATE NOT NULL,
+data_fim DATE NOT NULL,
+valor NUMERIC(12,2) NOT NULL,
+
+CONSTRAINT pk_servico
+    PRIMARY KEY (id),
+
+CONSTRAINT ck_servico_valor
+    CHECK (valor >= 0),
+
+CONSTRAINT ck_servico_datas
+    CHECK (data_fim >= data_inicio)
+);
