@@ -2,6 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("./config/cors");
+const pool = require("./database/connection");
+const query = require("pg/lib/native/query");
 
 const app = express();
 
@@ -17,6 +19,18 @@ app.get("/", (request, response) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`Servidor iniciado na porta ${PORT}`);
-});
+async function iniciarServidor() {
+    try {
+        await pool.query("SELECT NOW()");
+        console.log("Banco de dados conectado com sucesso.");
+
+        app.listen(PORT, () => {
+            console.log(`Servidor iniciado na porta ${PORT}`);
+        });
+    } catch(error) {
+        console.error("Erro ao conectar ao banco", error);
+        process.exit(1);
+    }
+}
+
+iniciarServidor();
