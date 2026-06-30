@@ -3,6 +3,7 @@ require("dotenv").config();
 const cidadeRoutes = require("./routes/cidades");
 const funcionarioRoutes = require("./routes/funcionarios");
 const equipamentoRoutes = require("./routes/equipamentos");
+const servicoRoutes = require("./routes/servicos");
 
 const express = require("express");
 const cors = require("./config/cors");
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/cidades", cidadeRoutes);
 app.use("/funcionario", funcionarioRoutes);
 app.use("/equipamento", equipamentoRoutes);
+app.use("/servico", servicoRoutes);
 
 app.get("/", (request, response) => {
     response.status(200).json({
