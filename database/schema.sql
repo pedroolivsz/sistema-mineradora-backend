@@ -85,3 +85,27 @@ CONSTRAINT ck_servico_valor
 CONSTRAINT ck_servico_datas
     CHECK (data_fim >= data_inicio)
 );
+
+-- =========================================
+-- TABELA: SERVICO_EQUIPAMENTO
+-- =========================================
+
+CREATE TABLE servico_equipamento (
+servico_id INTEGER NOT NULL,
+equipamento_id INTEGER NOT NULL,
+
+CONSTRAINT pk_servico_equipamento
+    PRIMARY KEY (servico_id, equipamento_id),
+
+CONSTRAINT fk_servico_equipamento_servico
+    FOREIGN KEY (servico_id)
+    REFERENCES servico(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+
+CONSTRAINT fk_servico_equipamento_equipamento
+    FOREIGN KEY (equipamento_id)
+    REFERENCES equipamento(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+);
