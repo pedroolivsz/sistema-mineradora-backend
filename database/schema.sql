@@ -109,3 +109,39 @@ CONSTRAINT fk_servico_equipamento_equipamento
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 );
+
+-- =========================================
+-- ÍNDICES
+-- =========================================
+
+-- Cidade
+CREATE INDEX idx_cidade_nome
+ON cidade(nome);
+
+-- Funcionário
+CREATE INDEX idx_funcionario_nome
+ON funcionario(nome);
+
+CREATE INDEX idx_funcionario_cidade
+ON funcionario(cidade_id);
+
+-- Equipamento
+CREATE INDEX idx_equipamento_nome
+ON equipamento(nome);
+
+CREATE INDEX idx_equipamento_cidade
+ON equipamento(cidade_id);
+
+CREATE INDEX idx_equipamento_status
+ON equipamento(status);
+
+-- Serviço
+CREATE INDEX idx_servico_nome
+ON servico(nome);
+
+CREATE INDEX idx_servico_data_inicio
+ON servico(data_inicio);
+
+-- Serviço_Equipamento
+CREATE INDEX idx_servico_equipamento_equipamento
+ON servico_equipamento(equipamento_id);
