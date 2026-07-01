@@ -1,12 +1,18 @@
 const cors = require("cors");
 
-const corsOptions = {
-origin: [
-        "http://localhost:5173",
-        "https://gestao-de-mineradoras.netlify.app/"
-    ],
-methods: ["GET", "POST", "PUT", "DELETE"],
-credentials: true
-};
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://gestao-de-mineradoras.netlify.app"
+];
 
-module.exports = cors(corsOptions);
+module.exports = cors({
+    origin(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        callback(new Error("Origem não permitida"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"]
+}); 
