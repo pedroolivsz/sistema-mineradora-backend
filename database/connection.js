@@ -1,11 +1,20 @@
 const { Pool } = require("pg");
 
+console.log("DATABASE_URL definida?", !!process.env.DATABASE_URL);
+console.log(
+  "Host:",
+  process.env.DATABASE_URL?.match(/@([^:/]+)/)?.[1]
+);
+console.log(
+  "Porta:",
+  process.env.DATABASE_URL?.match(/:(\d+)\//)?.[1]
+);
+
 const pool = new Pool({
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 pool.on("connect", () => {
